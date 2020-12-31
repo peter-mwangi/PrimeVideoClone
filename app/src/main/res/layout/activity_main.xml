@@ -8,24 +8,28 @@
     tools:context=".MainActivity"
     android:background="#0F171E">
 
-    <TextView
-        android:id="@+id/simple_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="Movie Streaming App"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/background_light"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+   <com.google.android.material.appbar.AppBarLayout
+       android:id="@+id/app_bar_layout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+           <androidx.appcompat.widget.Toolbar
+               android:id="@+id/toolbar"
+               android:layout_width="match_parent"
+               android:layout_height="?attr/actionBarSize">
+
+           </androidx.appcompat.widget.Toolbar>
+
+
+
+   </com.google.android.material.appbar.AppBarLayout>
 
    <com.google.android.material.tabs.TabLayout
        android:id="@+id/tab_layout"
        android:layout_width="409dp"
        android:layout_height="wrap_content"
-       android:layout_below="@id/simple_text"
-       android:layout_marginTop="24sp"
+       android:layout_below="@id/app_bar_layout"
+       android:layout_marginTop="14sp"
        android:layout_marginStart="16dp"
        android:layout_marginEnd="16dp"
        android:layout_alignParentStart="true"
