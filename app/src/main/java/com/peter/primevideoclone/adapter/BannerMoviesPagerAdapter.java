@@ -1,15 +1,18 @@
 package com.peter.primevideoclone.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.peter.primevideoclone.MovieDetailsActivity;
 import com.peter.primevideoclone.R;
 import com.peter.primevideoclone.model.BannerMovies;
 
@@ -50,7 +53,7 @@ public class BannerMoviesPagerAdapter extends PagerAdapter
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position)
+    public Object instantiateItem(@NonNull ViewGroup container, final int position)
     {
 //        return super.instantiateItem(container, position);
 
@@ -59,6 +62,23 @@ public class BannerMoviesPagerAdapter extends PagerAdapter
 
         Glide.with(context).load(bannerMoviesList.get(position).getImageUrl()).into(bannerImage);
         container.addView(view);
+
+        bannerImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Toast.makeText(context, bannerMoviesList.get(position).getMovieName(), Toast.LENGTH_LONG).show();
+
+                Intent movieDetailsIntent = new Intent(context, MovieDetailsActivity.class);
+                movieDetailsIntent.putExtra("movieId", bannerMoviesList.get(position).getId());
+                movieDetailsIntent.putExtra("movieName", bannerMoviesList.get(position).getMovieName());
+                movieDetailsIntent.putExtra("movieImageUrl", bannerMoviesList.get(position).getImageUrl());
+                movieDetailsIntent.putExtra("movieFileUrl", bannerMoviesList.get(position).getFileUrl());
+
+                context.startActivity(movieDetailsIntent);
+            }
+        });
         return view;
 
     }

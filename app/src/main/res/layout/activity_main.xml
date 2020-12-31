@@ -16,7 +16,20 @@
            <androidx.appcompat.widget.Toolbar
                android:id="@+id/toolbar"
                android:layout_width="match_parent"
-               android:layout_height="?attr/actionBarSize">
+               android:layout_height="?attr/actionBarSize"
+               android:gravity="center"
+               app:layout_scrollFlags="scroll|enterAlways">
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="?attr/actionBarSize"
+                   android:gravity="center_vertical"
+                   android:textColor="@android:color/background_light"
+                   android:fontFamily="sans-serif-condensed"
+                   android:textStyle="bold"
+                   android:textAlignment="center"
+                   android:text="Movie Streaming App"
+                   />
 
            </androidx.appcompat.widget.Toolbar>
 
@@ -29,7 +42,6 @@
        android:layout_width="409dp"
        android:layout_height="wrap_content"
        android:layout_below="@id/app_bar_layout"
-       android:layout_marginTop="14sp"
        android:layout_marginStart="16dp"
        android:layout_marginEnd="16dp"
        android:layout_alignParentStart="true"
@@ -56,38 +68,48 @@
 
    </com.google.android.material.tabs.TabLayout>
 
-    <RelativeLayout
-        android:id="@+id/relative_layout"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@id/tab_layout">
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/banner_view_pager"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tab_layout"
+        android:background="#0F171E"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/relative_layout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/banner_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_indicator"
-                android:layout_width="wrap_content"
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:tabBackground="@drawable/indicator_selector"
+                    android:layout_centerInParent="true"
+                    app:tabIndicatorHeight="0dp"
+                    android:layout_alignParentBottom="true"
+                    app:tabMaxWidth="15dp"/>
+
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_recycler"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabBackground="@drawable/indicator_selector"
-                android:layout_centerInParent="true"
-                app:tabIndicatorHeight="0dp"
-                android:layout_alignParentBottom="true"
-                app:tabMaxWidth="15dp"/>
-
-
-    </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relative_layout"
-        android:layout_marginTop="4dp"/>
-    
+                android:layout_below="@id/relative_layout"
+                android:layout_marginTop="4dp"/>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 </RelativeLayout>
